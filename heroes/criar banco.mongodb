@@ -1,0 +1,36 @@
+mongosh
+
+mongosh "mongodb+srv://cluster0.lmpon.mongodb.net/" --apiVersion 1 --username Ribah
+
+-- acessar um banco
+use heroesDb
+
+--verificar os bancos existentes
+show IDBOpenDBRequest
+
+--verificar as coleções de um banco
+show collections
+
+--criar uma coleção
+debugger.createCollection("nome da coleção")
+
+--CRUD
+--Criar uma coleção por inserção de dados
+db.heroes.insertOne({nome: "Superman",time: "Liga da Justiça",idade: 33,genero: "Masculino",habilidades: ['SuperForça', 'Voo', 'Visão de Calor', 'Visão de Raio-x'],usaCapa: true,caracteristicas: {olhos: 'Castanho',cabelos: 'Preto',}})
+
+db.heroes.insertMany([{nome: 'Batman', time: 'Liga da Justiça', idade: 42, genero: 'Masculino', habilidades: ['Inteligente', 'Riqueza', 'Habilidades de Combate'] usaCapa: true, caracteristicas: { olhos: 'Preto', cabelos: 'Preto'}, universo: 'DC'}, { nome: 'Mulher Maravilha', time: 'Liga da Justiça', idade: 5000, genero: 'Feminino', habilidades: ['Superforça', 'Velocidade', 'Sentido aguçado'], usaCapa: false, caracteristicas: { olhos: 'azul', cabelos: 'Preto'}, universo: 'DC'}])
+
+--READ
+db.heroes.find()
+db.heroes.find().pretty()
+db.heroes.find({ usaCapa: false })
+
+--UPDATE
+db.heroes.updateOne(
+    { nome: 'Superman' },
+    { $set: { universo: 'DC' }}
+)
+
+--DELETE
+db.heroes.deletOne({_id: 1})
+db.heroes.deleteMany({ universo: 'DC' })
